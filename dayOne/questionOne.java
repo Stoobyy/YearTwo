@@ -5,10 +5,7 @@ public class questionOne
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter score: ");
         int score = sc.nextInt();
-        if(score >= 90)
-        {
-            System.out.println("A");
-        }
+        if(score >= 90) System.out.println("A");
         else if(score >= 80)
         {
             System.out.println("B");
@@ -21,10 +18,8 @@ public class questionOne
         {
             System.out.println("D");
         }
-        else
-        {
-            System.out.println("F");
-        }
+        else System.out.println("F");
+
         
     }
 }
