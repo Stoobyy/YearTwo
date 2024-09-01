@@ -21,6 +21,5 @@ public class questionOne {
         System.out.println("Number of odd numbers: " + ocount);
          
 
-
     }
 }
