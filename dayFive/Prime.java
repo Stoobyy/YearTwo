@@ -9,15 +9,15 @@ public class Prime {
             FileWriter writer = new FileWriter(outputFile);
             Scanner scanner = new Scanner(reader);
             while(scanner.hasNextInt()) {
-                int num=scanner.nextInt();
+                int num = scanner.nextInt();
                 int i,flag=0;
-                for(i=2;i<=(num/2);i++) {
-                    if(num%i==0) {
+                for(i=2; i <= (num/2); i++) {
+                    if(num%i == 0) {
                         flag=1;
                         break;
                     }
                 }
-                if(flag==0) {
+                if(flag == 0) {
                     writer.write(num+"\n");
                 }
             }

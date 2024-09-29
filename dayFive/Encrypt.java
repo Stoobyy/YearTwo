@@ -8,7 +8,7 @@ public class Encrypt {
             FileReader reader = new FileReader(inputFile);
             FileWriter writer = new FileWriter(outputFile);
             int c;
-            while((c=reader.read()) != -1)
+            while((c = reader.read()) != -1)
             {
                 char e = (char)(c+2);
                 writer.write(e);
