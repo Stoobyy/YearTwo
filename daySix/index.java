@@ -44,6 +44,23 @@ class ATM {
         return balance;
     }
 
+    public void balanceUpdate(int newBal) {
+        String filename = accountNumber + ".txt";
+        PrintWriter writer = null;
+        try{
+            writer = new PrintWriter(filename);
+            writer.println(newBal);
+            writer.close();
+        }
+        catch(IOException e) {
+            System.out.println("Error: " + e);
+        }
+        finally{
+            System.out.println("Current balance: " + newBal);
+            if(writer != null) writer.close();
+        }
+    }
+
     public void withdraw(int amount){
         balance = balanceEnquiry();
         String filename = accountNumber + ".txt";
@@ -55,6 +72,7 @@ class ATM {
             writer = new PrintWriter(filename);
             balance -= amount;
             writer.println(balance);
+            balanceUpdate(balance);
             System.out.println("Withdrawal successful");
         }
         catch(insufficientBalance e) {
@@ -75,12 +93,12 @@ class ATM {
         balance = balanceEnquiry();
         PrintWriter writer = null;
         try{
-            balance = balanceEnquiry();
             balance += amount;
             String filename = accountNumber + ".txt";
             writer = new PrintWriter(filename);
             writer.println(balance);
             writer.close();
+            System.out.println("Deposit successful");
         }
         catch(IOException e) {
             System.out.println("Error: " + e);
@@ -97,13 +115,15 @@ class ATM {
         File file = new File(filename);
         PrintWriter writer = null;
         try{
-            writer = new PrintWriter(filename);
             if(file.exists()) {
                 if(amount > balance) {
                     throw new insufficientBalance("Insufficient balance");
                 }
-                writer.println(amount);
-                writer.close();
+                Scanner scanner = new Scanner(file);
+                int bal = scanner.nextInt();
+                scanner.close();
+                writer = new PrintWriter(filename);
+                writer.println(amount + bal);
                 withdraw(amount);
                 System.out.println("Transfer to Ac.NO"+ accountNumber + "successful");
             } else {
